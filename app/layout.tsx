@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Roboto, Playfair_Display } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { SessionProvider } from "@/components/providers";
 import { LocalizationProvider } from "@/lib/localization/context";
@@ -8,20 +8,6 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
-});
-
-const roboto = Roboto({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-roboto",
-});
-
-const playfair = Playfair_Display({
-  weight: ["400", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-playfair",
 });
 
 export const metadata: Metadata = {
@@ -56,7 +42,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="es" className={`${inter.variable} ${roboto.variable} ${playfair.variable}`}>
+    <html lang="es" className={inter.variable}>
       <body className={inter.className}>
         <LocalizationProvider>
           <SessionProvider>{children}</SessionProvider>
