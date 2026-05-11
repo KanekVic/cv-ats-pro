@@ -8,6 +8,7 @@ const nextConfig = {
         hostname: '**',
       },
     ],
+    unoptimized: false,
   },
   compress: true,
   poweredByHeader: false,
@@ -15,6 +16,19 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     optimizeCss: true,
+  },
+  // Vercel-specific optimizations
+  webpack: (config, { isServer }) => {
+    // Optimize for Vercel serverless
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      };
+    }
+    return config;
   },
 };
 
