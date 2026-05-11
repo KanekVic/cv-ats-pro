@@ -27,28 +27,41 @@ export async function POST(request: NextRequest) {
         const session = event.data.object as Stripe.Checkout.Session;
         const userId = session.metadata?.userId;
         const plan = session.metadata?.plan;
+        const stripeSubscriptionId = session.subscription as string;
 
         if (userId && plan) {
-          await prisma.subscription.upsert({
-            where: { userId },
-            update: {
-              plan: plan.toUpperCase() as "BASIC" | "PRO",
-              status: "ACTIVE",
-              currentPeriodStart: new Date(),
-              currentPeriodEnd: new Date(
-                Date.now() + 30 * 24 * 60 * 60 * 1000
-              ),
-            },
-            create: {
-              userId,
-              plan: plan.toUpperCase() as "BASIC" | "PRO",
-              status: "ACTIVE",
-              currentPeriodStart: new Date(),
-              currentPeriodEnd: new Date(
-                Date.now() + 30 * 24 * 60 * 60 * 1000
-              ),
-            },
+          // Find existing subscription for this user
+          const existingSubscription = await prisma.subscription.findFirst({
+            where: { userId, status: "ACTIVE" },
           });
+
+          if (existingSubscription) {
+            // Update existing subscription
+            await prisma.subscription.update({
+              where: { id: existingSubscription.id },
+              data: {
+                plan: plan.toUpperCase() as "BASIC" | "PRO",
+                status: "ACTIVE",
+                currentPeriodStart: new Date(),
+                currentPeriodEnd: new Date(
+                  Date.now() + 30 * 24 * 60 * 60 * 1000
+                ),
+              },
+            });
+          } else {
+            // Create new subscription
+            await prisma.subscription.create({
+              data: {
+                userId,
+                plan: plan.toUpperCase() as "BASIC" | "PRO",
+                status: "ACTIVE",
+                currentPeriodStart: new Date(),
+                currentPeriodEnd: new Date(
+                  Date.now() + 30 * 24 * 60 * 60 * 1000
+                ),
+              },
+            });
+          }
 
           await prisma.user.update({
             where: { id: userId },
