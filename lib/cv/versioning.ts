@@ -42,7 +42,7 @@ export async function restoreCVVersion(versionId: string) {
   await prisma.cV.update({
     where: { id: version.cvId },
     data: {
-      content: version.content,
+      content: version.content as any,
       updatedAt: new Date(),
     },
   });
