@@ -221,7 +221,7 @@ export default function HomePage() {
                     <Star key={i} size={16} fill="#f59e0b" />
                   ))}
                 </div>
-                <p>"{testimonial.text}"</p>
+                <p>&ldquo;{testimonial.text}&rdquo;</p>
                 <div className="author">
                   <strong>{testimonial.name}</strong>
                   <span>{testimonial.role}</span>
