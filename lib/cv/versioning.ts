@@ -48,7 +48,7 @@ export async function restoreCVVersion(versionId: string) {
   });
 
   // Create a new version from the restored state
-  await saveCVVersion(version.cvId, version.content as CVContent);
+  await saveCVVersion(version.cvId, version.content as unknown as CVContent);
 
   return version;
 }
