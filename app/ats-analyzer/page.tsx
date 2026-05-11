@@ -1,5 +1,5 @@
 import { ATSAnalyzer } from "@/components/ats/ATSAnalyzer";
-import "./ats.css";
+import "./page.css";
 
 export default function ATSAnalyzerPage() {
   const cvContent = "Ejemplo de contenido del CV..."; // TODO: Get from user's CV

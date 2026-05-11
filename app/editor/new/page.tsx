@@ -1,6 +1,6 @@
 import { CVEditor } from "@/components/editor/CVEditor";
 import { CVContent } from "@/types/cv";
-import "./editor.css";
+import "../editor.css";
 
 export default function NewCVPage() {
   function handleSave(data: CVContent) {

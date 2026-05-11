@@ -4,7 +4,7 @@ import { useState } from "react";
 import { DocumentImporter } from "@/components/import/DocumentImporter";
 import { CVEditor } from "@/components/editor/CVEditor";
 import { CVContent } from "@/types/cv";
-import "./document-importer.css";
+import "@/components/import/document-importer.css";
 
 export default function ImportCVPage() {
   const [cvData, setCvData] = useState<Partial<CVContent>>({});
