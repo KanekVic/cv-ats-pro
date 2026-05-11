@@ -1,11 +1,12 @@
-import { MercadoPagoConfig, Preference, Payment } from "mercadopago";
+// MercadoPago integration temporarily disabled for Vercel deployment
+// import { MercadoPagoConfig, Preference, Payment } from "mercadopago";
 
-const client = new MercadoPagoConfig({
-  accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN || "",
-});
+// const client = new MercadoPagoConfig({
+//   accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN || "",
+// });
 
-const preferenceClient = new Preference(client);
-const paymentClient = new Payment(client);
+// const preferenceClient = new Preference(client);
+// const paymentClient = new Payment(client);
 
 export interface MercadoPagoPreference {
   id: string;
@@ -33,58 +34,14 @@ export async function createPreference(
   failureUrl: string,
   pendingUrl: string
 ): Promise<MercadoPagoPreference> {
-  const price = prices[plan];
-
-  const preference = await preferenceClient.create({
-    body: {
-      items: [
-        {
-          id: "item-1",
-          title: price.title,
-          quantity: 1,
-          unit_price: price.unit_price,
-          currency_id: price.currency_id,
-        },
-      ],
-      back_urls: {
-        success: successUrl,
-        failure: failureUrl,
-        pending: pendingUrl,
-      },
-      auto_return: "approved",
-      metadata: {
-        userId,
-        plan,
-      },
-      payment_methods: {
-        excluded_payment_types: [],
-        installments: 12,
-        default_installments: 1,
-      },
-    },
-  });
-
-  return {
-    id: preference.id || "",
-    init_point: preference.init_point || "",
-    sandbox_init_point: preference.sandbox_init_point || "",
-  };
+  // MercadoPago integration temporarily disabled
+  throw new Error("MercadoPago integration temporarily disabled");
 }
 
 export async function createPixPayment(
   amount: number,
   description: string
 ) {
-  const payment = await paymentClient.create({
-    body: {
-      transaction_amount: amount,
-      description,
-      payment_method_id: "pix",
-      payer: {
-        email: "user@example.com",
-      },
-    },
-  });
-
-  return payment;
+  // MercadoPago integration temporarily disabled
+  throw new Error("MercadoPago integration temporarily disabled");
 }
