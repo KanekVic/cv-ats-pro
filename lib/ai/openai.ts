@@ -1,15 +1,22 @@
 import OpenAI from "openai";
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+let openai: OpenAI | null = null;
+
+function getOpenAI() {
+  if (!openai) {
+    openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }
+  return openai;
+}
 
 export async function generateSummary(
   experience: string,
   industry: string,
   language: string = "es"
 ): Promise<string> {
-  const response = await openai.chat.completions.create({
+  const response = await getOpenAI().chat.completions.create({
     model: "gpt-4o",
     messages: [
       {
@@ -39,7 +46,7 @@ export async function generateBullets(
     ? `Aquí están los bullets actuales (mejóralos o genera nuevos si es necesario):\n${existingBullets.join("\n")}`
     : "Genera bullets nuevos desde cero.";
 
-  const response = await openai.chat.completions.create({
+  const response = await getOpenAI().chat.completions.create({
     model: "gpt-4o",
     messages: [
       {
@@ -74,7 +81,7 @@ export async function suggestSkills(
   experience: string,
   language: string = "es"
 ): Promise<string[]> {
-  const response = await openai.chat.completions.create({
+  const response = await getOpenAI().chat.completions.create({
     model: "gpt-4o",
     messages: [
       {
@@ -106,7 +113,7 @@ export async function improveText(
   context: string,
   language: string = "es"
 ): Promise<string> {
-  const response = await openai.chat.completions.create({
+  const response = await getOpenAI().chat.completions.create({
     model: "gpt-4o",
     messages: [
       {
