@@ -4,6 +4,10 @@ import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import { prisma } from "@/lib/db/prisma";
 import bcrypt from "bcryptjs";
+import { validateEnv } from "@/lib/env";
+
+// Validate environment variables
+validateEnv();
 
 declare module "next-auth" {
   interface Session {
