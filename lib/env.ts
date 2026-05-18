@@ -16,6 +16,11 @@ const optionalEnvVars = [
 ] as const;
 
 export function validateEnv() {
+  // Skip validation during Next.js build phase — runtime env vars are not available at build time
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    return;
+  }
+
   const missing: string[] = [];
 
   for (const envVar of requiredEnvVars) {
