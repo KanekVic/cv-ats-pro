@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createPreference } from "@/lib/payments/mercadopago";
 
 export const runtime = "nodejs";
+export const maxDuration = 60;
 
 export async function POST(request: NextRequest) {
   try {
