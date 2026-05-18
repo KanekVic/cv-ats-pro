@@ -9,6 +9,10 @@
     "lint": "next lint",
     "postinstall": "prisma generate"
   },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
   "dependencies": {
     "@auth/prisma-adapter": "^2.11.2",
     "@prisma/client": "^6.5.0",

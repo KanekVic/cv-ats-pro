@@ -2,9 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { parseDocument } from "@/lib/import/document-parser";
 import { extractCVFromText } from "@/lib/ai/cv-extractor";
 
-export const runtime = "nodejs";
-export const maxDuration = 60;
-
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();

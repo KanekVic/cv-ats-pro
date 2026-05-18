@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getCVVersions } from "@/lib/cv/versioning";
 
-export const runtime = "nodejs";
-export const maxDuration = 60;
-
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }

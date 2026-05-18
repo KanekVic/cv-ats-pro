@@ -5,9 +5,6 @@ import Stripe from "stripe";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "");
 
-export const runtime = "nodejs";
-export const maxDuration = 60;
-
 export async function POST(request: NextRequest) {
   const body = await request.text();
   const signatureHeader = headers().get("webhook-signature") || "";

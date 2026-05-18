@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generateCoverLetter } from "@/lib/ai/cover-letter";
 
-export const runtime = "nodejs";
-export const maxDuration = 60;
-
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
