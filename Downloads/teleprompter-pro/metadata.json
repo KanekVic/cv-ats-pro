@@ -1,0 +1,6 @@
+{
+  "name": "Teleprompter Pro",
+  "description": "Un teleprompter profesional con apuntador de voz integrado que lee tu guion y permite controlar la velocidad en tiempo real. Incluye modo espejo y resaltado inteligente de texto.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
